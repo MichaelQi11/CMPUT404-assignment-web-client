@@ -36,6 +36,7 @@ class HTTPClient(object):
     def get_host_port(self,url):
         o = urllib.parse.urlparse(url)
         return o
+        
     def connect(self, host, port):
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.socket.connect((host, port))
@@ -106,7 +107,7 @@ class HTTPClient(object):
                 parse_args = parse_args + arg + '=' + args[arg] + '&'
             parse_args = parse_args[:-1]
         args_length = str(len(parse_args))
-        
+
         payload = f'POST {url_path} HTTP/1.1\r\nHost: {url_obj.hostname}\r\nContent-Type: application/x-www-form-urlencoded\r\nContent-Length:{args_length}\r\n\r\n{parse_args}'
 
         self.connect(url_obj.hostname, url_port)
