@@ -36,7 +36,7 @@ class HTTPClient(object):
     def get_host_port(self,url):
         o = urllib.parse.urlparse(url)
         return o
-        
+
     def connect(self, host, port):
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.socket.connect((host, port))
@@ -87,6 +87,7 @@ class HTTPClient(object):
         self.connect(url_obj.hostname, url_port)
         self.sendall(payload)
         full_data = self.recvall(self.socket)
+        print(full_data)
         code = self.get_code(full_data)
         body = self.get_body(full_data)
         self.close()
@@ -113,6 +114,7 @@ class HTTPClient(object):
         self.connect(url_obj.hostname, url_port)
         self.sendall(payload)
         full_data = self.recvall(self.socket)
+        print(full_data)
         code = self.get_code(full_data)
         body = self.get_body(full_data)
         self.close()
